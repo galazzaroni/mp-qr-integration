@@ -75,7 +75,7 @@ $(document).ready(function() {
 					// para recibir las notificaciones en tu endpoint público.
 
 					var orderJSON ={"external_reference": external_reference,
-									"notification_url": "",
+									"notification_url": "https://galazzaroni-mp-qr-integration.herokuapp.com/notifications",
 									"items" : items
 									};
 
@@ -85,7 +85,7 @@ $(document).ready(function() {
 
 						console.log("Crea orden:");
 						console.log(data);
-						
+
 
 						// Muestra JSON de la orden creada
 						$('#createdOrder').text(JSON.stringify(data));
