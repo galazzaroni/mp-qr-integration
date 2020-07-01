@@ -85,6 +85,7 @@ $(document).ready(function() {
 
 						console.log("Crea orden:");
 						console.log(data);
+						
 
 						// Muestra JSON de la orden creada
 						$('#createdOrder').text(JSON.stringify(data));
