@@ -40,7 +40,7 @@ if($n==2){
 
 	// retorna http 200 conforme recibió bien la notificación:
 	header("HTTP/1.1 200 OK");
-	$resource = isset($_GET['id']) ? $_GET['id'] : str_replace('https://api.mercadolibre.com/merchant_orders/'.$collector_id.'?access_token='.$access_token,"",$resource);
+	$resource = isset($_GET['id']) ? $_GET['id'] : str_replace('https://api.mercadolibre.com/merchant_orders/',"",$resource);
 
 	// Guarda el campo resource de la notificación recibida:
 	// seguramente deberás dar derechos al archivo notifications.txt

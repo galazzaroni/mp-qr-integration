@@ -75,7 +75,7 @@ $(document).ready(function() {
 					// para recibir las notificaciones en tu endpoint público.
 
 					var orderJSON ={"external_reference": external_reference,
-									"notification_url": "https://galazzaroni-mp-qr-integration.herokuapp.com/notifications",
+									"notification_url": "https://galazzaroni-mp-qr-integration.herokuapp.com/api/notifications",
 									"items" : items
 									};
 
