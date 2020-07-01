@@ -322,12 +322,64 @@ $(document).ready(function() {
 		var externalStoreID = $('#externalStoreID').val();
 
 
-		// REVISA AQUÍ:
-		// Modifica el storeJSON con la estructura necesaria para crear una Store correctamente.
+		/*
+			{"id":"32265386",
+			"name":
+			"Sucursal 35794595",
+			"date_creation":"2020-06-30T03:58:09.030Z",
+			"business_hours":
+			{"monday":[{"open":"08:00","close":"18:00"}],"tuesday":[{"open":"08:00","close":"18:00"}],"wednesday":[{"open":"08:00","close":"18:00"}],"thursday":[{"open":"08:00","close":"18:00"}],"friday":[{"open":"08:00","close":"18:00"}],"saturday":[{"open":"08:00","close":"12:00"}],"sunday":[{"open":"08:00","close":"12:00"}]},
+			"location":{"address_line":"Sinclair 2929, Palermo, Capital Federal, Argentina",
+			"reference":"Piso 1","latitude":-34.5756022,"longitude":-58.4249225},
+			"external_id":"suc35794595003"}
+		*/
 
-		var storeJSON = {}
+		var storeJSON = {
+			external_id : externalStoreID,
+			name: storeName,
+			location: {
+				city_name: city,
+				latitude: latitude,
+				longitude: longitude, 
+				reference: addressReference,
+				state_name: state, 
+				street_name: streetName,
+				street_number: streetNumber,
+			},
+			business_hours: {
+				monday: [{
+					open: "08:00",
+					close: "18:00"
+				}],
+				tuesday: [{
+					open: "08:00",
+					close: "18:00"
+				}],
+				wednesday: [{
+					open: "08:00",
+					close: "18:00"
+				}],
+				thursday: [{
+					open: "08:00",
+					close: "18:00"
+				}],
+				friday: [{
+					open: "08:00",
+					close: "18:00"
+				}],
+				saturday: [{
+					open: "08:00",
+					close: "12:00"
+				}],
+				sunday: [{
+					open: "08:00",
+					close: "12:00"
+				}],
+			},
+		}
 
-		console.log(storeJSON);
+		//let storeJSON = JSON.stringify(sJSON);
+		//console.log(storeJSON);
 		$.post("api/store/create/",{json:JSON.stringify(storeJSON)},function(results){
 			console.log("Crea store:");
 			console.log(results);
@@ -347,21 +399,34 @@ $(document).ready(function() {
 
 		// REVISA AQUÍ:
 
-		var category = 1;   // Agrega aquí el número de categoría o MCC necesario para 
-							// Identificar al POS de restaurante
+		var category = 621102;   // Agrega aquí el número de categoría o MCC necesario para 
+								 // Identificar al POS de restaurante
 
-
-		// REVISA AQUÍ:
-		// Comprueba que el posJSON sea el adecuado para crear un POS integrado correctamente.
+		/*
+		{"id":10303244,
+		"qr":{"image":"https://www.mercadopago.com/instore/merchant/qr/10303244/27f7b032fe1649bd8d7a4d475ce1cae7a31f1b9d2f5e45acad05288b07426541.png",
+		"template_document":"https://www.mercadopago.com/instore/merchant/qr/10303244/template_27f7b032fe1649bd8d7a4d475ce1cae7a31f1b9d2f5e45acad05288b07426541.pdf",
+		"template_image":"https://www.mercadopago.com/instore/merchant/qr/10303244/template_27f7b032fe1649bd8d7a4d475ce1cae7a31f1b9d2f5e45acad05288b07426541.png"},
+		"status":"active","date_created":"2020-06-30T00:19:00.000-04:00",
+		"date_last_updated":"2020-06-30T00:19:00.000-04:00",
+		"uuid":"27f7b032fe1649bd8d7a4d475ce1cae7a31f1b9d2f5e45acad05288b07426541",
+		"user_id":586728271,
+		"name":"Sucursal 35794595",
+		"fixed_amount":false,
+		"category":621102,
+		"store_id":"32265386",
+		"external_store_id":"suc35794595003",
+		"external_id":"pos0002"}
+		*/
 
 		var posJSON ={"name":posName,
 					"external_store_id":externalStoreID,
-					"fixed_amount":false,
-					"category_id":category,
+					"fixed_amount":true,
+					"category":category,
 					"external_id":externalPOSID};
 
 
-
+		//console.log(JSON.stringify(posJSON));
 		$.post("api/pos/create/",{json:JSON.stringify(posJSON)},function(results){
 			console.log("Crea POS/QR:");
 			console.log(results);
@@ -385,7 +450,7 @@ var items = [{
 		    "picture_url":"https://globalassets.starbucks.com/assets/f12bc8af498d45ed92c5d6f1dac64062.jpg?impolicy=1by1_wide_1242",
 		    "description" : "Espresso shots topped with hot water create a light layer of crema culminating in this wonderfully rich cup with depth and nuance. Pro Tip: For an additional boost, ask your barista to try this with an extra shot.",
 		    "unit_price" : 90,
-		    "quantity" : 1
+		    "quantity" : 2
 		  },
 		  {
 		  	"id":"sku011",
